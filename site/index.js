@@ -1,10 +1,16 @@
+import { MuiThemeProvider } from '@material-ui/core';
 import React from 'react';
 import { render } from 'react-dom';
 
 import App from './App';
+import createTheme from './theme';
+
+const theme = createTheme();
 
 render(
-  <App />,
+  <MuiThemeProvider theme={theme}>
+    <App />
+  </MuiThemeProvider>,
   document.getElementById('root') // eslint-disable-line no-undef
 );
 

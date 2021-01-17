@@ -1,7 +1,9 @@
 import React from 'react';
 
+import MonsterBuilder from './pages/MonsterBuilder';
+
 const App = props => {
-  return (<p>This is the monster builder....</p>);
+  return <MonsterBuilder />;
 };
 
 export default App;
