@@ -1,5 +1,4 @@
 import React from 'react';
-import * as Yup from 'yup';
 
 import {
   Typography
@@ -7,21 +6,11 @@ import {
 
 import TextInput from '../../components/TextInput';
 
-const validationSchema = Yup.object({
-  name: Yup.string()
-    .required("Please input the name of the monster")
-});
-
 const BaseInformation = props => {
   return(
     <>
       <Typography variant="h5">Base Information</Typography>
-      <TextInput 
-        label="Name"
-        name="name"
-        type="text"
-        placeholder="Marlboro"
-      />
+      <Typography>Name</Typography>
       <Typography>Category</Typography>
       <Typography>Monster Family</Typography>
       <Typography>Location</Typography>
@@ -37,4 +26,3 @@ const BaseInformation = props => {
 };
 
 export default BaseInformation;
-export { validationSchema };
