@@ -33,7 +33,7 @@ class Compendium extends Component {
 
     this.state = {
       monsters: [
-        { name: "Rhemora", level: 10, exp: 1200, gil: 451 },
+        { name: "Remora", level: 10, exp: 1200, gil: 451 },
         { name: "Marlboro", level: 10, exp: 4110, gil: 1250 },
         { name: "Clear Flan", level: 10, exp: 1990, gil: 980 }
       ]
@@ -42,17 +42,12 @@ class Compendium extends Component {
 
   render() {
     const { classes } = this.props;
-      // <Grid container className={classes.compendium}>
-      //   {this.state.monsters.map((monster) => (
-      //     <Typography>{monster.name}</Typography>
-      //   ))}
-      // </Grid>
     
     return (
       <List className={classes.compendium}>
         {this.state.monsters.map((monster) => (
-          <RouterLink to={`/details?name=${monster.name}`}>
-            <ListItem key={monster.name}>
+          <RouterLink to={`/details?name=${monster.name}`} key={monster.name}>
+            <ListItem>
               <ListItemAvatar>
                 <Avatar alt={monster.name ? monster.name : "Unknown Creature"} src={monster.img ? monster.img : defaultIcon} />
               </ListItemAvatar>

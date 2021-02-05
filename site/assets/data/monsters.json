@@ -1,0 +1,89 @@
+[
+  {
+    "name": "Remora",
+    "category": "Aquan",
+    "family": "Fish",
+    "location": "El'Grad Sewers",
+    "imageUri": "",
+    "size": 1,
+    "intelligence": "Animal",
+    "reaction": "Wary",
+    "behavior": "",
+    "frequency": "Common",
+    "encounterSize": "1/1",
+    "senses": {
+      "dayVision": 0,
+      "nightVision": 0,
+      "sound": 0,
+      "smell": 0,
+      "life": 0,
+      "magic": 0
+    },
+    "type": "Regular",
+    "level": 10,
+    "experience": 1200,
+    "gil": 451,
+    "attributes": {
+      "strength": 13,
+      "vitality": 12,
+      "agility": 6,
+      "speed": 6,
+      "magic": 1,
+      "spirit": 10
+    },
+    "hitPointBase": 2,
+    "magicPointBase": 0,
+    "armorBase": 1,
+    "magicArmorBase": 4,
+    "actionAbilities": [
+      {
+        "name": "Bite",
+        "type": "Attack",
+        "damageDie": "d10",
+        "damageType": "Physical",
+        "target": "enemy",
+        "areaOfEffect": 1,
+        "range": 1,
+        "modifiers": [],
+        "toHitStat": "accuracy",
+        "dodgeStat": "evasion",
+        "damageReduction": "armor"
+      },
+      {
+        "name": "Scale Shot",
+        "type": "Attack",
+        "damageDie": "d8",
+        "damageType": "Water",
+        "target": "enemy",
+        "areaOfEffect": 1,
+        "range": 4,
+        "modifiers": [
+          { "name": "statusTouch", "type": "blind" }
+        ],
+        "toHitStat": "accuracy",
+        "dodgeStat": "evasion",
+        "damageReduction": "armor"
+      }
+    ],
+    "spells": [],
+    "jobAbilities": [],
+    "movementAbilities": ["move-water"],
+    "supportAbilities": [
+      {
+        "name": "Elemental Resistance",
+        "element": "Water"
+      },
+      {
+        "name": "Elemental Weakness",
+        "element": "Lightning"
+      }
+    ],
+    "reactionAbilities": [],
+    "fieldEffects": [],
+    "bossAbilities": [],
+    "commonItem": "",
+    "uncommonItem": "Fish Scale",
+    "rareItem": "",
+    "veryRareItem": "Fish Fin"
+  }
+]
