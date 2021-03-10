@@ -21,6 +21,7 @@ class MonsterBuilder extends Component {
     this.handleSpeedChange = this.handleSpeedChange.bind(this);
     this.handleMagicChange = this.handleMagicChange.bind(this);
     this.handleSpiritChange = this.handleSpiritChange.bind(this);
+    this.handleArmorBaseChange = this.handleArmorBaseChange.bind(this);
 
     this.state = {
       experience: 40,
@@ -45,31 +46,31 @@ class MonsterBuilder extends Component {
   }
 
   handleLevelChange(event) {
-    this.setState({ level: event.target.value });
+    this.setState({ level: Number(event.target.value) });
   }
 
   handleStrengthChange(event) {
-    this.setState({ strength: event.target.value });
+    this.setState({ strength: Number(event.target.value) });
   }
 
   handleVitalityChange(event) {
-    this.setState({ vitality: event.target.value });
+    this.setState({ vitality: Number(event.target.value) });
   }
 
   handleAgilityChange(event) {
-    this.setState({ agility: event.target.value });
+    this.setState({ agility: Number(event.target.value) });
   }
 
   handleSpeedChange(event) {
-    this.setState({ speed: event.target.value });
+    this.setState({ speed: Number(event.target.value) });
   }
 
   handleMagicChange(event) {
-    this.setState({ magic: event.target.value });
+    this.setState({ magic: Number(event.target.value) });
   }
 
   handleSpiritChange(event) {
-    this.setState({ spirit: event.target.value });
+    this.setState({ spirit: Number(event.target.value) });
   }
 
   handleHPBaseChange(event) {
@@ -79,6 +80,10 @@ class MonsterBuilder extends Component {
 
   handleMPBaseChange(event) {
     this.setState({ mpBase: Number(event.target.value) });
+  }
+
+  handleArmorBaseChange(event) {
+    this.setState({ armorBase: Number(event.target.value) });
   }
 
   calculateExperience() {
@@ -105,6 +110,13 @@ class MonsterBuilder extends Component {
       case 1.5: baseExperience += 22; break;
       case 2: baseExperience += 35; break;
       case 4: baseExperience += 50; break;
+    }
+
+    switch(this.state.armorBase) {
+      case 0.5: baseExperience -= 5; break;
+      case 2: baseExperience += 10; break;
+      case 4: baseExperience += 19; break;
+      case 6: baseExperience += 26; break;
     }
 
     return baseExperience * this.state.level;
@@ -134,6 +146,13 @@ class MonsterBuilder extends Component {
       case 1.5: baseGil += 10; break;
       case 2: baseGil += 16; break;
       case 4: baseGil += 28; break;
+    }
+
+    switch(this.state.armorBase) {
+      case 0.5: baseGil -= 2; break;
+      case 2: baseGil += 5; break;
+      case 4: baseGil += 9; break;
+      case 6: baseGil += 18; break;
     }
 
     return baseGil * this.state.level;
@@ -200,6 +219,10 @@ class MonsterBuilder extends Component {
     mp *= this.state.spirit;
 
     return mp;
+  }
+
+  calculateArmor() {
+    return this.state.armorBase * this.state.level + (this.state.vitality / 2);
   }
 
   render() {
@@ -303,6 +326,15 @@ class MonsterBuilder extends Component {
           <MenuItem value="4">4</MenuItem>
         </Select>
         <Typography>Total Magic Points: {this.calculateMaxMP()}</Typography>
+        <InputLabel id="armorBaseLabel">Amor Base</InputLabel>
+        <Select id="armorBaseSelect" labelId="armorBaseLabel" defaultValue="1" onChange={this.handleArmorBaseChange}>
+          <MenuItem value="0.5">0.5</MenuItem>
+          <MenuItem value="1">1</MenuItem>
+          <MenuItem value="2">2</MenuItem>
+          <MenuItem value="4">4</MenuItem>
+          <MenuItem value="6">6</MenuItem>
+        </Select>
+        <Typography>Armor: {this.calculateArmor()}</Typography>
       </div>
     )
   }
