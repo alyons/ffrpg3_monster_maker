@@ -15,6 +15,12 @@ class MonsterBuilder extends Component {
     this.handleLevelChange = this.handleLevelChange.bind(this);
     this.handleMPBaseChange = this.handleMPBaseChange.bind(this);
     this.handleMonsterTypeChange = this.handleMonsterTypeChange.bind(this);
+    this.handleStrengthChange = this.handleStrengthChange.bind(this);
+    this.handleVitalityChange = this.handleVitalityChange.bind(this);
+    this.handleAgilityChange = this.handleAgilityChange.bind(this);
+    this.handleSpeedChange = this.handleSpeedChange.bind(this);
+    this.handleMagicChange = this.handleMagicChange.bind(this);
+    this.handleSpiritChange = this.handleSpiritChange.bind(this);
 
     this.state = {
       experience: 40,
@@ -40,6 +46,30 @@ class MonsterBuilder extends Component {
 
   handleLevelChange(event) {
     this.setState({ level: event.target.value });
+  }
+
+  handleStrengthChange(event) {
+    this.setState({ strength: event.target.value });
+  }
+
+  handleVitalityChange(event) {
+    this.setState({ vitality: event.target.value });
+  }
+
+  handleAgilityChange(event) {
+    this.setState({ agility: event.target.value });
+  }
+
+  handleSpeedChange(event) {
+    this.setState({ speed: event.target.value });
+  }
+
+  handleMagicChange(event) {
+    this.setState({ magic: event.target.value });
+  }
+
+  handleSpiritChange(event) {
+    this.setState({ spirit: event.target.value });
   }
 
   handleHPBaseChange(event) {
@@ -109,10 +139,79 @@ class MonsterBuilder extends Component {
     return baseGil * this.state.level;
   }
 
+  calculateMaxAttribute(attributeName) {
+    let max = 35 + this.state.level;
+
+    if (attributeName != "strength") {
+      max -= this.state.strength;
+    }
+
+    if (attributeName != "vitality") {
+      max -= this.state.vitality;
+    }
+
+    if (attributeName != "agility") {
+      max -= this.state.agility;
+    }
+
+    if (attributeName != "speed") {
+      max -= this.state.speed;
+    }
+
+    if (attributeName != "magic") {
+      max -= this.state.magic;
+    }
+
+    if (attributeName != "spirit") {
+      max -= this.state.spirit;
+    }
+
+    return max;
+  }
+
+  calculateMaxHP() {
+    let hp = 1;
+
+    switch(this.state.mosterType) {
+      case 'endBoss': hp *= 6; break;
+      case 'boss': hp *= 4; break;
+      case 'notorious': hp *= 2; break;
+      default: hp *= 1; break;
+    }
+
+    hp *= this.state.level;
+    hp *= this.state.vitality;
+    hp *= this.state.hpBase;
+
+    return hp;
+  }
+
+  calculateMaxMP() {
+    let mp = this.state.mpBase;
+
+    switch(this.state.mosterType) {
+      case 'endBoss': mp *= 3; break;
+      case 'boss': mp *= 2; break;
+      case 'notorious': mp *= 1.5; break;
+      default: mp *= 1; break;
+    }
+
+    mp *= this.state.level;
+    mp *= this.state.spirit;
+
+    return mp;
+  }
+
   render() {
     let totalExp = this.calculateExperience();
     let totalGil = this.calculateGil();
-
+    let strengthMax = this.calculateMaxAttribute("strength");
+    let vitalityMax = this.calculateMaxAttribute("vitality");
+    let agilityMax = this.calculateMaxAttribute("agility");
+    let speedMax = this.calculateMaxAttribute("speed");
+    let magicMax = this.calculateMaxAttribute("magic");
+    let spiritMax = this.calculateMaxAttribute("spirit");
+    let statTotal = Number(this.state.strength) + Number(this.state.vitality) + Number(this.state.agility) + Number(this.state.speed) + Number(this.state.magic) + Number(this.state.spirit);
 
     return (
       <div>
@@ -133,7 +232,57 @@ class MonsterBuilder extends Component {
           inputProps={{ min: 1, max: 100 }}
           onChange={this.handleLevelChange}
           type="number" />
-        <Typography id="attributesLabel">Attribues ({35 + this.state.level})</Typography>
+        <Typography id="attributesLabel">Attribues ({35 + Number(this.state.level)}) [{statTotal}]</Typography>
+
+        <InputLabel id="strengthLabel">Strength</InputLabel>
+        <Input
+          id="strengthInput"
+          labelId="strengthLabel"
+          defaultValue={this.state.strength}
+          inputProps={{ min: 1, max: strengthMax }}
+          onChange={this.handleStrengthChange}
+          type="number" />
+        <InputLabel id="vitalityLabel">Vitality</InputLabel>
+        <Input
+          id="vitalityInput"
+          labelId="vitalityLabel"
+          defaultValue={this.state.vitality}
+          inputProps={{ min: 1, max: vitalityMax }}
+          onChange={this.handleVitalityChange}
+          type="number" />
+        <InputLabel id="agilityLabel">Agility</InputLabel>
+        <Input
+          id="agilityInput"
+          labelId="agilityLabel"
+          defaultValue={this.state.agility}
+          inputProps={{ min: 1, max: agilityMax }}
+          onChange={this.handleAgilityChange}
+          type="number" />
+        <InputLabel id="speedLabel">Speed</InputLabel>
+        <Input
+          id="speedInput"
+          labelId="speedLabel"
+          defaultValue={this.state.speed}
+          inputProps={{ min: 1, max: speedMax }}
+          onChange={this.handleSpeedChange}
+          type="number" />
+        <InputLabel id="magicLabel">Magic</InputLabel>
+        <Input
+          id="magicInput"
+          labelId="magicLabel"
+          defaultValue={this.state.magic}
+          inputProps={{ min: 1, max: magicMax }}
+          onChange={this.handleMagicChange}
+          type="number" />
+        <InputLabel id="spirirLabel">Spirit</InputLabel>
+        <Input
+          id="spiritInput"
+          labelId="spiritLabel"
+          defaultValue={this.state.spirit}
+          inputProps={{ min: 1, max: spiritMax }}
+          onChange={this.handleSpiritChange}
+          type="number" />
+
         <InputLabel id="hpBaseLabel">Hit Point Base</InputLabel>
         <Select labelId="hpBaseLabel" id="hpBaseSelect" defaultValue="2" onChange={this.handleHPBaseChange}>
           <MenuItem value="1">1</MenuItem>
@@ -143,6 +292,7 @@ class MonsterBuilder extends Component {
           <MenuItem value="6">6</MenuItem>
           <MenuItem value="8">8</MenuItem>
         </Select>
+        <Typography>Total Hit Points: {this.calculateMaxHP()}</Typography>
         <InputLabel id="mpBaseLabel">Magic Point Base</InputLabel>
         <Select id="mpBaseSelect" labelId="mpBaseLabel" defaultValue="0" onChange={this.handleMPBaseChange}>
           <MenuItem value="0">---</MenuItem>
@@ -152,6 +302,7 @@ class MonsterBuilder extends Component {
           <MenuItem value="2">2</MenuItem>
           <MenuItem value="4">4</MenuItem>
         </Select>
+        <Typography>Total Magic Points: {this.calculateMaxMP()}</Typography>
       </div>
     )
   }

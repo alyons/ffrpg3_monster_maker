@@ -7,7 +7,10 @@ import {
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
+import Abilities from './Abilities';
 import BasicInfo from './BasicInfo';
+import CategoricInfo from './CategoricInfo';
+import CombatStats from './CombatStats';
 
 import MONSTERS from '../../assets/data/monsters.json';
 
@@ -54,6 +57,9 @@ const MonsterDetails = props => {
   return (
     <Grid container className={classes.main}>
       <BasicInfo props={monster}/>
+      <CategoricInfo props={monster} />
+      <CombatStats props={monster} />
+      <Abilities props={monster} />
     </Grid>
   );
 }
