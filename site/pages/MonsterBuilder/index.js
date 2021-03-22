@@ -22,6 +22,7 @@ class MonsterBuilder extends Component {
     this.handleMagicChange = this.handleMagicChange.bind(this);
     this.handleSpiritChange = this.handleSpiritChange.bind(this);
     this.handleArmorBaseChange = this.handleArmorBaseChange.bind(this);
+    this.handleMagicArmorBaseChange = this.handleMagicArmorBaseChange.bind(this);
 
     this.state = {
       experience: 40,
@@ -84,6 +85,10 @@ class MonsterBuilder extends Component {
 
   handleArmorBaseChange(event) {
     this.setState({ armorBase: Number(event.target.value) });
+  }
+
+  handleMagicArmorBaseChange(event) {
+    this.setState({ mArmorBase: Number(event.target.value) });
   }
 
   calculateExperience() {
@@ -191,7 +196,7 @@ class MonsterBuilder extends Component {
   calculateMaxHP() {
     let hp = 1;
 
-    switch(this.state.mosterType) {
+    switch(this.state.monsterType) {
       case 'endBoss': hp *= 6; break;
       case 'boss': hp *= 4; break;
       case 'notorious': hp *= 2; break;
@@ -208,7 +213,7 @@ class MonsterBuilder extends Component {
   calculateMaxMP() {
     let mp = this.state.mpBase;
 
-    switch(this.state.mosterType) {
+    switch(this.state.monsterType) {
       case 'endBoss': mp *= 3; break;
       case 'boss': mp *= 2; break;
       case 'notorious': mp *= 1.5; break;
@@ -223,6 +228,10 @@ class MonsterBuilder extends Component {
 
   calculateArmor() {
     return this.state.armorBase * this.state.level + (this.state.vitality / 2);
+  }
+
+  calculateMagicArmor() {
+    return this.state.mArmorBase * this.state.level + (this.state.spirit / 2);
   }
 
   render() {
@@ -335,6 +344,15 @@ class MonsterBuilder extends Component {
           <MenuItem value="6">6</MenuItem>
         </Select>
         <Typography>Armor: {this.calculateArmor()}</Typography>
+        <InputLabel id="mArmorBaseLabel">Magic Armor Base</InputLabel>
+        <Select id="mArmorBaseSelect" labelId="mArmorBaseLabel" defaultValue="1" onChange={this.handleMagicArmorBaseChange}>
+          <MenuItem value="0.5">0.5</MenuItem>
+          <MenuItem value="1">1</MenuItem>
+          <MenuItem value="2">2</MenuItem>
+          <MenuItem value="4">4</MenuItem>
+          <MenuItem value="6">6</MenuItem>
+        </Select>
+        <Typography>Armor: {this.calculateMagicArmor()}</Typography>
       </div>
     )
   }
