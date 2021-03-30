@@ -2,6 +2,7 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import {
+  Button,
   Typography
 } from '@material-ui/core';
 import { useTheme } from '@material-ui/styles';
@@ -22,6 +23,7 @@ const Header = props => {
           { isMobile ? "FFRPG 3rd Bestiary" : "Final Fantasy RPG 3rd Bestiary" }
         </Typography>
       </RouterLink>
+      <RouterLink to='/builder'><Button>Builder</Button></RouterLink>
     </div>
   );
 };
