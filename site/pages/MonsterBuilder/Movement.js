@@ -3,46 +3,42 @@ import React, { useState } from 'react';
 import { Checkbox, FormControl, FormGroup, FormControlLabel, FormHelperText } from '@material-ui/core';
 
 export default function Movement(props) {
-  let { state, onChange } = props;
-
-  const [burrow, setBurrow] = useState(state.movement[0]);
-  const [flight, setFlight] = useState(state.movement[1]);
-  const [float, setFloat] = useState(state.movement[2]);
-  const [ground, setGround] = useState(state.movement[3]);
-  const [teleport, setTeleport] = useState(state.movement[4]);
-  const [water, setWater] = useState(state.movement[5]);
+  let { state } = props;
 
   const handleBurrow = (event) => {
-    setBurrow(event.target.checked);
-    updateParentState();
+    let newMovement = JSON.parse(JSON.stringify(state.movement));
+    newMovement[0] = event.target.checked;
+    props.onChange({ movement: newMovement });
   }
 
   const handleFlight = (event) => {
-    setFlight(event.target.checked);
-    updateParentState();
+    let newMovement = JSON.parse(JSON.stringify(state.movement));
+    newMovement[1] = event.target.checked;
+    props.onChange({ movement: newMovement });
   }
 
   const handleFloat = (event) => {
-    setFloat(event.target.checked);
-    updateParentState();
+    let newMovement = JSON.parse(JSON.stringify(state.movement));
+    newMovement[2] = event.target.checked;
+    props.onChange({ movement: newMovement });
   }
 
   const handleGround = (event) => {
-    setGround(event.target.checked);
-    updateParentState();
+    let newMovement = JSON.parse(JSON.stringify(state.movement));
+    newMovement[3] = event.target.checked;
+    props.onChange({ movement: newMovement });
   }
 
   const handleTeleport = (event) => {
-    setTeleport(event.target.checked);
-    updateParentState();
+    let newMovement = JSON.parse(JSON.stringify(state.movement));
+    newMovement[4] = event.target.checked;
+    props.onChange({ movement: newMovement });
   }
 
   const handleWater = (event) => {
-    setWater(event.target.checked);
-  }
-
-  const updateParentState = () => {
-    onChange({ movement: [burrow, flight, float, ground, teleport, water]})
+    let newMovement = JSON.parse(JSON.stringify(state.movement));
+    newMovement[5] = event.target.checked;
+    props.onChange({ movement: newMovement });
   }
 
   return (
@@ -51,42 +47,42 @@ export default function Movement(props) {
         <FormControlLabel
           value="burrow"
           control={<Checkbox
-            checked={burrow}
+            checked={state.movement[0]}
             onChange={handleBurrow} />}
           label="Burrow"
           labelPlacement="end" />
         <FormControlLabel
           value="flight"
           control={<Checkbox
-            checked={flight}
+            checked={state.movement[1]}
             onChange={handleFlight} />}
           label="Flight"
           labelPlacement="end" />
         <FormControlLabel
           value="float"
           control={<Checkbox
-            checked={float}
+            checked={state.movement[2]}
             onChange={handleFloat} />}
           label="Float"
           labelPlacement="end" />
         <FormControlLabel
           value="ground"
           control={<Checkbox
-            checked={ground}
+            checked={state.movement[3]}
             onChange={handleGround} />}
           label="Ground"
           labelPlacement="end" />
         <FormControlLabel
           value="teleport"
           control={<Checkbox
-            checked={teleport}
+            checked={state.movement[4]}
             onChange={handleTeleport} />}
           label="Teleport"
           labelPlacement="end" />
         <FormControlLabel
           value="water"
           control={<Checkbox
-            checked={water}
+            checked={state.movement[5]}
             onChange={handleWater} />}
           label="Water"
           labelPlacement="end" />

@@ -41,7 +41,7 @@ export default function MonsterBuilder() {
       <p>Spells</p>
       <p>Job Abilities</p>
       <p>Movement Abilities</p>
-      {/* Not Currently Working with EXP and Gil <Movement state={state} onChange={handleChange}/>*/}
+      <Movement state={state} onChange={handleChange}/>
       <SupportAbilities state={state} onChange={handleChange} />
       <p>Reaction Abilities</p>
       <p>Field Effects</p>
