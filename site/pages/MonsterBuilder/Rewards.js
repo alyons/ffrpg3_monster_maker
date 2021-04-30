@@ -11,13 +11,20 @@ import {
 export default function Rewards(props) {
   let { state } = props;
 
-  function calculateRewards () {
-    let exp = 0;
-    let gil = 0;
+  const calculateSpellReward = (isExp) => {
+    let reward = 0;
 
-    // Support Abilities
-    // if (!!state.supportAbilities.badScan)
-  }
+    state.spells.forEach(spell => {
+      if (spell.type == '')
+      switch(spell.level) {
+        case 1: reward += (isExp) ? 8 : 5; break;
+        default:/** Do Nothing */ break;
+      }
+    });
+
+
+    return reward;
+  };
 
   const calculateExperience = () => {
     let baseExperience = 0;

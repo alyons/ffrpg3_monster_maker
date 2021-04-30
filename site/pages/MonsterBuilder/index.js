@@ -5,6 +5,7 @@ import Profile from './Profile';
 import Rewards from './Rewards';
 import Attributes from './Attributes';
 import SupportAbilities from './SupportAbilities';
+import AttackList from './AttackList';
 
 export default function MonsterBuilder() {
   const [state, setState] = useState({
@@ -24,8 +25,26 @@ export default function MonsterBuilder() {
     mArmorBase: 1,
     movement: [false, false, false, true, false, false], // Burrow, Flight, Float, Ground, Teleport, Water
     items: ["", "", "", ""], // 51-100, 25-50, 08-24, 01-07
-    supportAbilities: []
+    attacks: [
+      {
+        name: "Arcane Shot",
+        damageDie: 8,
+        target: "single",
+        modifiers: [{
+          name: "ranged",
+          value: 5
+        }],
+        attribute: "magic",
+        toHit: "maccuracy",
+        toEvade: "mevasion",
+        toBlock: "marmor"
+      }
+    ],
+    supportAbilities: [],
+    spells: []
   });
+
+  const [showAttackBuilder, setShowAttackBuilder] = useState(false);
 
   const handleChange = (updates) => {
     // console.log(updates);
@@ -36,7 +55,7 @@ export default function MonsterBuilder() {
     <div>
       <Profile state={state} onChange={handleChange}/>
       <Attributes state={state} onChange={handleChange} />
-      <p>Attacks</p>
+      <AttackList state={state} onChange={handleChange} />
       <p>Action Abilities</p>
       <p>Spells</p>
       <p>Job Abilities</p>

@@ -1,0 +1,17 @@
+{
+  "attacks": [
+    {
+      "name": "Bite",
+      "damageDie": "d10",
+      "damageType": "Physical",
+      "areaOfEffect": 1,
+      "range": 1,
+      "verticalReach": 1,
+      "modifiers": [],
+      "toHit": "accuracy",
+      "dodge": "evasion",
+      "damageReduction": "armor",
+      "identifyFriendOrFoe": false
+    }
+  ]
+}

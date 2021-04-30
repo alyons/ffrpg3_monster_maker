@@ -24,6 +24,7 @@ const Header = props => {
         </Typography>
       </RouterLink>
       <RouterLink to='/builder'><Button>Builder</Button></RouterLink>
+      <RouterLink to='/attacks'><Button>Attacks</Button></RouterLink>
     </div>
   );
 };
